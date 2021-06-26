@@ -1,0 +1,23 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: monitoring
+resources:
+  - service-account.yaml
+  - prometheus-release.yaml
+  - iamproxy-deployment.yaml
+#
+# Generate a ConfigMap resources from the specified file
+# This will generate a ConfigMap which will contain a key named 'value.yaml'
+# The value associated with this key will be the contents of the file 'prometheus-nosidecar-values.yaml'
+# 
+configMapGenerator:
+  - name: prometheus-nosidecar-configmap
+    files:
+      - values.yaml=prometheus-nosidecar-values.yaml
+#
+# Trigger a Helm release upgrade everytime the values in prometheus-nosidecar-values.yaml change
+#
+configurations:
+  - kustomizeconfig.yaml
+

@@ -1,0 +1,3 @@
+# Deploying Kubernetes Workloads using Flux V2
+
+This repository contains sample YAML manifest that demonstrate effective usage if <b><a href="https://kustomize.io/">Kustomize</b></a> in conjunction with Flux. This repository is used as a Git config source for Flux V2 based deployment to a Kubernetes cluster as demonstrated by the scripts in the <b><a href="https://github.com/vijayansarathy/fluxv2-deployment-primary">fluxv2-deployment-primary</b></a> Git repository. The manifests here will deploy a set of services that make up a demo online store that exposes a set of APIs to fetch product recommendations. The Go source code for this application is found <a href="https://github.com/vijayansarathy/storefront-frontend-go">here</a>.

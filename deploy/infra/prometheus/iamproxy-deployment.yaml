@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aws-iamproxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: aws-iamproxy
+  template:
+    metadata:
+      labels:
+        run: aws-iamproxy
+    spec:
+      serviceAccountName: iamproxy-service-account
+      containers:
+      - name: aws-iamproxy
+        image: public.ecr.aws/aws-observability/aws-sigv4-proxy:1.0
+        args:
+          - --name
+          - aps
+          - --region
+          - us-east-1
+          - --host
+          - aps-workspaces.us-east-1.amazonaws.com
+        ports:
+          - containerPort: 8080
+          
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: iamproxy
+  labels:
+    run: aws-iamproxy
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    run: aws-iamproxy

@@ -1,0 +1,17 @@
+serviceAccounts:
+        server:
+            create: false
+            name: "iamproxy-service-account"
+nodeExporter:
+    enabled: false
+alertmanager:   
+    enabled: false
+pushgateway:
+    enabled: false
+server:
+    statefulSet:
+        enabled: false
+    persistentVolume:   
+        enabled: false
+    remoteWrite:
+        - url: http://iamproxy/workspaces/ws-ea14a7c0-3262-4c05-bcba-619993dd2e3a/api/v1/remote_write

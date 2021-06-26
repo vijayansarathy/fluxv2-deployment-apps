@@ -1,0 +1,62 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  template:
+    spec: 
+      containers:          
+        - name: go  
+          image: 937351930975.dkr.ecr.us-east-1.amazonaws.com/k8s-backend:doesNotExist  
+          env:
+            - name: AWS_XRAY_DAEMON_ADDRESS
+              value: xray-service.monitoring:2000            
+            - name: POSTGRES_USER
+              valueFrom:
+                    secretKeyRef:
+                      name: postgres-credentials
+                      key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                    secretKeyRef:
+                      name: postgres-credentials
+                      key: POSTGRES_PASSWORD
+            - name: POSTGRES_DATABASE
+              valueFrom:
+                    secretKeyRef:
+                      name: postgres-credentials
+                      key: POSTGRES_DATABASE               
+            - name: POSTGRES_HOST
+              valueFrom:
+                    secretKeyRef:
+                      name: postgres-credentials
+                      key: POSTGRES_HOST  
+            - name: POSTGRES_PORT
+              valueFrom:
+                    secretKeyRef:
+                      name: postgres-credentials
+                      key: POSTGRES_PORT                        
+            - name: POSTGRES_TABLEPREFIX
+              valueFrom:
+                    secretKeyRef:
+                      name: postgres-credentials
+                      key: POSTGRES_TABLEPREFIX               
+          livenessProbe:
+            httpGet: 
+              path: /live
+              port: 3000
+            initialDelaySeconds: 10
+            timeoutSeconds: 1
+            periodSeconds: 10
+            failureThreshold: 3            
+          readinessProbe:
+            httpGet: 
+              path: /live
+              port: 3000
+            initialDelaySeconds: 10
+            timeoutSeconds: 1
+            periodSeconds: 10
+            failureThreshold: 3        
+
+
