@@ -10,7 +10,8 @@ resources:
 # Generate a ConfigMap resources from the specified file
 # This will generate a ConfigMap which will contain a key named 'value.yaml'
 # The value associated with this key will be the contents of the file 'prometheus-nosidecar-values.yaml'
-# 
+# This ConfigMap can then be references in a HelmRelease to override the default values for a Helm chart
+#
 configMapGenerator:
   - name: prometheus-nosidecar-configmap
     files:
