@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: go
-        image: 937351930975.dkr.ecr.us-west-2.amazonaws.com/k8s-frontend:initial-stage # {"$imagepolicy": "flux-system:app-image-stage-policy"}
+        image: 937351930975.dkr.ecr.us-west-2.amazonaws.com/k8s-frontend:1257202f3def08fd438d79c5ad2413827a7e9de6-1627408634 # {"$imagepolicy": "flux-system:app-image-stage-policy"}
         imagePullPolicy: Always
         resources:
           requests:
