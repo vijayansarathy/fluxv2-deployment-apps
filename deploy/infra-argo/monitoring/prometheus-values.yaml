@@ -17,6 +17,7 @@ prometheus:
     kubeStateMetrics:
         enabled: false
 
+    nameOverride: prometheus
     serviceAccounts:
         server:
             create: true
