@@ -4,6 +4,8 @@ kind: Application
 metadata:
   name: monitoring 
   namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io  
 spec:
   project: sarathy-project
   source:
@@ -16,7 +18,7 @@ spec:
       - grafana-values.yaml   
       - prometheus-values.yaml   
   destination:
-    server: https://kubernetes.default.svc
+    server: {{ .Values.spec.destination.server }}
     namespace: monitoring
   syncPolicy:
     automated:

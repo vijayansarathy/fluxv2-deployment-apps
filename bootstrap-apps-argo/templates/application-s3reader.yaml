@@ -4,6 +4,8 @@ kind: Application
 metadata:
   name: s3reader
   namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io  
 spec:
   project: sarathy-project
   source:
@@ -11,7 +13,7 @@ spec:
     targetRevision: HEAD
     path: s3reader
   destination:
-    server: https://8E57C97EA840A686CD539096DBE5DE96.gr7.us-west-2.eks.amazonaws.com
+    server: {{ .Values.spec.destination.server }}
     namespace: nodejs
   syncPolicy:
     automated:
