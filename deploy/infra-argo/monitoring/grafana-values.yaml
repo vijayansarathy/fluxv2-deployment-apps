@@ -20,3 +20,6 @@ grafana:
         name: grafana-service-account
         annotations: 
             eks.amazonaws.com/role-arn: arn:aws:iam::937351930975:role/EKS-AMP-ServiceAccount-Role        
+    grafana.ini:
+        auth:
+            sigv4_auth_enabled: true            
