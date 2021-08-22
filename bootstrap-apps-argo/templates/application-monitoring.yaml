@@ -1,0 +1,39 @@
+#
+# The Application CRD is the Kubernetes resource object representing a deployed application instance in an environment. 
+# It is defined by two key pieces of information:
+# 'source' - reference to the desired state in Git (repository, revision, path, environment)
+# 'destination' - reference to the target cluster and namespace. 
+# When deployed within a cluster, 'destination' is set to 'server' with the URL https://kubernetes.default.svc
+#
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: monitoring 
+  namespace: argocd
+spec:
+  project: sarathy-project
+  source:
+    repoURL: git@github.com:vijayansarathy/fluxv2-deployment-apps.git
+    targetRevision: HEAD
+    path: deploy/infra-argo/monitoring
+    helm:
+      #
+      # By default, the Helm release name is equal to the Application name to which it belongs
+      # Sometimes, especially on a centralised ArgoCD, you may want to override that name
+      #
+      releaseName: observability     
+      #
+      # Helm values files for overriding values in the Helm chart
+      # Multiple files can be specified here
+      # The path is relative to the 'spec.source.path' directory defined above
+      #
+      valueFiles:
+      - grafana-values.yaml   
+      - prometheus-values.yaml   
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      prune: true    

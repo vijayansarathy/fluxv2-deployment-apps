@@ -1,0 +1,40 @@
+#
+# The Application CRD is the Kubernetes resource object representing a deployed application instance in an environment. 
+# It is defined by two key pieces of information:
+# 'source' - reference to the desired state in Git (repository, revision, path, environment)
+# 'destination' - reference to the target cluster and namespace. 
+# When deployed within a cluster, 'destination' is set to 'server' with the URL https://kubernetes.default.svc
+#
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: storefront 
+  namespace: argocd
+spec:
+  project: sarathy-project
+  source:
+    repoURL: git@github.com:vijayansarathy/fluxv2-deployment-apps.git
+    targetRevision: HEAD
+    path: deploy/overlays/stage
+    #
+    # Using a custom installation of Kustomize as the default version has issues with overlays
+    # The custom version should have been installed and then referenced in the ArgoCD ConfigMap
+    #
+    kustomize:
+      version: v4.1.3    
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: stage
+  #
+  # Automatically sync an application when differences are detected between the desired manifests in Git, and the live state in the cluster
+  # A benefit of automatic sync is that CI/CD pipelines no longer need direct access to the Argo CD API server to perform the deployment. 
+  # Instead, the pipeline makes a commit and push to the Git repository with the changes to the manifests in the tracking Git repo
+  #
+  syncPolicy:
+    automated:
+      #
+      # By default (and as a safety mechanism), automated sync will not delete resources when Argo CD detects the resource is no longer defined in Git.
+      # To prune the resources, a manual sync can always be performed with pruning checked. 
+      # Alternatively, pruning can also be enabled to happen automatically as part of the automated sync
+      prune: true
