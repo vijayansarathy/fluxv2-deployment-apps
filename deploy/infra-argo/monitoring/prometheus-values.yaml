@@ -1,0 +1,44 @@
+
+#
+# Consider the case where Prometheus is being deployed directly using Helm as follows:
+# 'helm install prometheus-amp prometheus-community/prometheus -n monitoing -f values.yaml'
+# The parameter overrides specified at the top level in the 'values.yaml' file will pertain to those defined in various templates used by the Prometheus chart
+#
+# OTOH, with ArgoCD deployment, we are specifying a custom chart with a top-level Chart.yaml file.
+# Prometheus chart is listed as a dependency of this custom chart.
+# Hence, parameter overrides specified at the top level in the 'values.yaml' file will now pertain to those defined in various templates, if any, used by the custom chart
+# Parameter overrides that pertain to any of the dependent charts should be specified in a section named after the dependent chart's name.
+#
+
+#
+# Parameter overrides for Prometheus chart
+#
+prometheus:
+    kubeStateMetrics:
+        enabled: false
+
+    serviceAccounts:
+        server:
+            create: true
+            name: "prometheus-service-account"
+            annotations: 
+                eks.amazonaws.com/role-arn: arn:aws:iam::937351930975:role/EKS-AMP-ServiceAccount-Role
+    nodeExporter:
+        enabled: false
+    alertmanager:   
+        enabled: false
+    pushgateway:
+        enabled: false
+    server:
+        statefulSet:
+            enabled: false
+        persistentVolume:   
+            enabled: false
+        remoteWrite:
+          - url: https://aps-workspaces.us-east-1.amazonaws.com/workspaces/ws-46773539-a8c6-4344-a90b-948381f66811/api/v1/remote_write
+            sigv4:
+                region: us-east-1
+            queue_config:
+                max_samples_per_send: 1000
+                max_shards: 200
+                capacity: 2500
