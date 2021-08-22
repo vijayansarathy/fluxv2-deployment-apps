@@ -1,13 +1,13 @@
 kubeStateMetrics:
-    enabled: false
+    enabled: true
 
 prometheus:
     serviceAccounts:
-            server:
-                create: true
-                name: "iamproxy-service-account"
-                annotations: 
-                    eks.amazonaws.com/role-arn: arn:aws:iam::937351930975:role/EKS-AMP-ServiceAccount-Role
+        server:
+            create: true
+            name: "iamproxy-service-account"
+            annotations: 
+                eks.amazonaws.com/role-arn: arn:aws:iam::937351930975:role/EKS-AMP-ServiceAccount-Role
     nodeExporter:
         enabled: true
     alertmanager:   
@@ -20,7 +20,7 @@ prometheus:
         persistentVolume:   
             enabled: false
         remoteWrite:
-            - url: https://aps-workspaces.us-east-1.amazonaws.com/workspaces/ws-46773539-a8c6-4344-a90b-948381f66811/api/v1/remote_write
+          - url: https://aps-workspaces.us-east-1.amazonaws.com/workspaces/ws-46773539-a8c6-4344-a90b-948381f66811/api/v1/remote_write
             sigv4:
                 region: us-east-1
             queue_config:
