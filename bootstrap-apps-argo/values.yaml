@@ -1,5 +1,3 @@
-metadata:
-  namespace: bootstrap
 spec:
   destination:
     server: https://kubernetes.default.svc

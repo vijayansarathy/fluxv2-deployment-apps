@@ -3,10 +3,11 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: s3reader
+  namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io  
 spec:
-  project: sarathy-project
+  project: bootstrap-project
   source:
     repoURL: git@github.com:vijayansarathy/fluxv2-deployment-apps.git
     targetRevision: HEAD
