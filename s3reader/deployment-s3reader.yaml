@@ -24,6 +24,10 @@ spec:
       annotations:
         prometheus.io/scrape: 'false'     
     spec: 
+      dnsConfig:
+        options: 
+          - name: "ndots"
+            value: 2    
       containers:          
         - name: node  
           image: 937351930975.dkr.ecr.us-west-2.amazonaws.com/k8s-nodeapp:latest
