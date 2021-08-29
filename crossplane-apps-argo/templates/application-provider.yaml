@@ -1,0 +1,22 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: providers 
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"    
+spec:
+  project: sarathy-workloads-project
+  source:
+    repoURL: git@github.com:vijayansarathy/fluxv2-deployment-apps.git
+    targetRevision: HEAD
+    path: deploy/overlays/stage
+  destination:
+    server: {{ .Values.spec.destination.server }}
+    namespace: store
+  syncPolicy:
+    automated:
+      prune: true

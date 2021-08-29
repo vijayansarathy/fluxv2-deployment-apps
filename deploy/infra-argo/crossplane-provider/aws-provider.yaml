@@ -1,0 +1,11 @@
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: crossplane-provider-aws
+spec:
+  #
+  # It is best to not to use the 'master' tag for the provider
+  # There might be version compatibility issues with Crossplane version and the AWS provider version
+  # Checkout for all available versions: https://github.com/crossplane/provider-aws
+  #
+  package: "crossplane/provider-aws:v0.16.0"

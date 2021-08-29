@@ -1,0 +1,4 @@
+spec:
+  destination:
+    server: https://7DBB43702AB9F505B4FF5FF79BF25C59.gr7.us-west-2.eks.amazonaws.com
+
