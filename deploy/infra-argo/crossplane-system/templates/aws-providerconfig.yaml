@@ -1,0 +1,14 @@
+apiVersion: aws.crossplane.io/v1beta1
+kind: ProviderConfig
+metadata:
+  #
+  # Note that the Crossplane provider for AWS looks specifically for a ProviderConfig named 'default'
+  # 
+  name: default
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      namespace: crossplane-system
+      name: aws-credentials
+      key: credentials
