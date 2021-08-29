@@ -1,0 +1,28 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: crossplane 
+  namespace: argocd 
+spec:
+  project: sarathy-workloads-project
+  source:
+    repoURL: git@github.com:vijayansarathy/fluxv2-deployment-apps.git
+    targetRevision: HEAD
+    path: deploy/infra-argo/crossplane-system
+    helm:
+      releaseName: crossplane     
+  destination:
+    server: {{ .Values.spec.destination.server }}
+    namespace: crossplane-system
+  syncPolicy:
+    automated:
+      prune: true    
+    syncOptions:
+    - CreateNamespace=true
+    retry:
+      limit: 1
+      backoff:
+        duration: 5s 
+        factor: 2 
+        maxDuration: 1m       
