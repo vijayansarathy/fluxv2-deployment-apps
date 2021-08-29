@@ -187,7 +187,7 @@ metadata:
   name: sealed-secrets-controller
   namespace: sealed-secrets
   annotations:
-    argocd.argoproj.io/sync-wave: "1"  
+    argocd.argoproj.io/sync-wave: "4"  
 spec:
   minReadySeconds: 30
   replicas: 1
