@@ -5,6 +5,8 @@ metadata:
   # Note that the Crossplane provider for AWS looks specifically for a ProviderConfig named 'default'
   # 
   name: default
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"      
 spec:
   credentials:
     source: Secret
