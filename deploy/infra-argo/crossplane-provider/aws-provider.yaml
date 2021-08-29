@@ -2,8 +2,6 @@ apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
   name: crossplane-provider-aws
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"      
 spec:
   #
   # It is best to not to use the 'master' tag for the provider
