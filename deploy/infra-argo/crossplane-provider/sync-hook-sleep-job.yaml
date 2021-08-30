@@ -5,13 +5,13 @@ metadata:
   annotations:
     argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
-    argocd.argoproj.io/sync-wave: "3"      
+    argocd.argoproj.io/sync-wave: "2"      
 spec:
   template:
     spec:
       containers:
       - name: sleep
         image: alpine:latest
-        command: ["sleep", "20"]
+        command: ["sleep", "30"]
       restartPolicy: Never
   backoffLimit: 0
