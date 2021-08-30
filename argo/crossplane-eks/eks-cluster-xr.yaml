@@ -1,8 +1,8 @@
 ---
 apiVersion: eks.sarathy.io/v1beta1
-kind: SarathyCluster
+kind: EKSCluster
 metadata:
-  name: eks-dev-cluster
+  name: eks-prod-cluster
   annotations:
     argocd.argoproj.io/sync-wave: "2"   
 spec:
@@ -10,9 +10,9 @@ spec:
     region: us-west-2
     version: "1.20"
     workload: "non-gpu"
-    size: 4
+    size: 2
   compositionRef:
-    name: aws-eks-cluster
+    name: amazon-eks-cluster
   writeConnectionSecretToRef:
     namespace: eks
-    name: eks-dev-cluster-connection
+    name: eks-prod-cluster-connection
