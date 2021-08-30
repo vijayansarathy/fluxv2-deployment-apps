@@ -1,7 +1,8 @@
+---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: wait-after-provider-
+  name: wait-after-provider
   annotations:
     argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
@@ -10,8 +11,8 @@ spec:
   template:
     spec:
       containers:
-      - name: sleep
-        image: alpine:latest
-        command: ["sleep", "30"]
+        - name: sleep
+          image: alpine:latest
+          command: ["sleep", "30"]
       restartPolicy: Never
   backoffLimit: 0
