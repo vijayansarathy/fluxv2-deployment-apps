@@ -5,7 +5,7 @@ metadata:
   generateName: wait-after-provider-
   namespace: crossplane-system
   annotations:
-    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
     argocd.argoproj.io/sync-wave: "2"      
 spec:
