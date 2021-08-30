@@ -6,7 +6,7 @@ metadata:
   namespace: crossplane-system
   annotations:
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
-    argocd.argoproj.io/sync-wave: "2"      
+    argocd.argoproj.io/sync-wave: "3"      
 spec:
   template:
     spec:
