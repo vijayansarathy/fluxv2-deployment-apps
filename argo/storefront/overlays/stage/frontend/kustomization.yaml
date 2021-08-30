@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: store
+
+#
+# Each entry in this list must be a path to a file, or a path referring to another kustomization directory
+# The files in this list are usually manifests pertaining to resources like Deployment, Service, etc.
+#
+resources:
+  - namespace.yaml
+  - ingress.yaml
+  - ../../../base/frontend
+
+transformers:
+- labels.yaml
+
+#
+# This is a strategic merge patch (SMP)
+# An SMP looks like an incomplete YAML specification of a Kubernetes resource
+# The SMP includes fields to establish the group/version/kind/name of the resource to patch
+# Plus, just enough remaining fields to step into a nested structure to specify a new field value
+#
+patches:
+- path: deployment-patch.yaml 
+  target:
+    group: apps
+    version: v1
+    kind: Deployment

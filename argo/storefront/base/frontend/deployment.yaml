@@ -1,0 +1,35 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  template:
+    spec: 
+      containers:          
+        - name: go 
+          image: 937351930975.dkr.ecr.us-east-1.amazonaws.com/k8s-frontend:doesNotExist
+          env:
+            - name: AWS_REGION
+              value: us-east-1
+            - name: AWS_XRAY_DAEMON_ADDRESS
+              value: xray-service.monitoring:2000           
+            - name: DATASTORE_SERVICE
+              value: backend-svc
+          livenessProbe:
+            httpGet: 
+              path: /live
+              port: 3000
+            initialDelaySeconds: 5
+            timeoutSeconds: 1
+            periodSeconds: 5
+            failureThreshold: 3            
+          readinessProbe:
+            httpGet: 
+              path: /live
+              port: 3000
+            initialDelaySeconds: 5
+            timeoutSeconds: 1
+            periodSeconds: 5
+            failureThreshold: 3        
+

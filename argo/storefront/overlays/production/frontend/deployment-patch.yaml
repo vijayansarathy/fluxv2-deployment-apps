@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 2
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: 'true'
+    spec:
+      containers:
+      - name: go
+        image: 937351930975.dkr.ecr.us-east-1.amazonaws.com/k8s-frontend:initial-prod # {"$imagepolicy": "flux-system:app-image-prod-policy"}
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256Mi"

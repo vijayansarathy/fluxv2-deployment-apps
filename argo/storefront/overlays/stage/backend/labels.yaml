@@ -1,0 +1,31 @@
+---
+apiVersion: builtin
+kind: LabelTransformer
+metadata:
+  name: labeltransformer
+#
+# List of labels to be added
+#
+labels:
+  app: backend
+  role: webservice
+  env: stage
+#
+# List of fields under different resources where these labels should be added
+#
+fieldSpecs:
+- path: metadata/labels
+  create: true
+  kind: Service
+- path: spec/selector
+  create: true
+  kind: Service
+- path: metadata/labels
+  create: true
+  kind: Deployment
+- path: spec/selector/matchLabels
+  create: true
+  kind: Deployment
+- path: spec/template/metadata/labels
+  create: true
+  kind: Deployment
