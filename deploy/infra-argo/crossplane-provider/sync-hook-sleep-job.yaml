@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: wait-after-provider
+  generateName: wait-after-provider-
   namespace: crossplane-system
   annotations:
     argocd.argoproj.io/hook: Sync
