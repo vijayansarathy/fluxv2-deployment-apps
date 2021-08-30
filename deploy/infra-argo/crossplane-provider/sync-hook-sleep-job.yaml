@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: wait-after-provider-
+  name: wait-secret-mount
   namespace: crossplane-system
   annotations:
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
