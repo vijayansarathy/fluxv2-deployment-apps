@@ -71,7 +71,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: sleep
+  generateName: post-s3reader
   namespace: nodejs
   annotations:
     argocd.argoproj.io/hook: Sync

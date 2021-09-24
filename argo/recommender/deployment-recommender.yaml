@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: recommender-app
-  namespace: java
+  namespace: nodejs
   annotations:
     argocd.argoproj.io/sync-wave: "10"    
 spec:
@@ -88,7 +88,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: recommender-svc
-  namespace: java
+  namespace: nodejs
   annotations:
     argocd.argoproj.io/sync-wave: "20"    
 spec:
@@ -107,8 +107,8 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: sleep
-  namespace: java
+  generateName: post-recommender
+  namespace: nodejs
   annotations:
     argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
