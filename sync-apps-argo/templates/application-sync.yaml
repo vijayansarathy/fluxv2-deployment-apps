@@ -9,7 +9,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: s3reader
+  name: syncer
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io    
@@ -18,7 +18,7 @@ spec:
   source:
     repoURL: git@github.com:vijayansarathy/fluxv2-deployment-apps.git
     targetRevision: HEAD
-    path: argo/s3reader
+    path: argo/syncing
   destination:
     server: {{ .Values.spec.destination.server }}
     namespace: nodejs
