@@ -4,6 +4,8 @@ kind: Deployment
 metadata:
   name: s3-reader
   namespace: nodejs
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"  
 spec:
   replicas: 3
   selector:
@@ -52,6 +54,8 @@ kind: Service
 metadata:
   name: s3reader-svc
   namespace: nodejs
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"   
 spec:
   sessionAffinity: None
   type: ClusterIP  
@@ -63,3 +67,20 @@ spec:
     app: s3-reader
     role: web-service    
 
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sleep
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  template:
+    spec:
+      containers:
+        - name: page-down
+          image: alpine:latest
+          command: ["sleep", "20"]
+      restartPolicy: Never
