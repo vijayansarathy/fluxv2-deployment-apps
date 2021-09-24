@@ -4,7 +4,7 @@ kind: Provider
 metadata:
   name: crossplane-provider-aws
   annotations:
-    argocd.argoproj.io/sync-wave: "30"    
+    argocd.argoproj.io/sync-wave: "20"    
 spec:
   package: "public.ecr.aws/awsvijisarathy/crossplane-provider-aws:v0.16.0"
 

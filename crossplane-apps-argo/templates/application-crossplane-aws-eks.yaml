@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: crossplane-provider 
+  name: crossplane-aws-eks 
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io   
