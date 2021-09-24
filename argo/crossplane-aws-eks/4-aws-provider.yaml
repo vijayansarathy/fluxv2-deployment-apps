@@ -1,23 +1,12 @@
 ---
-apiVersion: pkg.crossplane.io/v1
-kind: Provider
-metadata:
-  name: crossplane-provider-aws
-  annotations:
-    argocd.argoproj.io/sync-wave: "20"   
-    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true 
-spec:
-  package: "public.ecr.aws/awsvijisarathy/crossplane-provider-aws:v0.16.0"
-
----
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: pre-provider
+  generateName: before-provider
   annotations:
-    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
-    argocd.argoproj.io/sync-wave: "30"
+    argocd.argoproj.io/sync-wave: "20"
 spec:
   template:
     spec:
@@ -27,15 +16,28 @@ spec:
           command: ["sleep", "30"]
       restartPolicy: Never
 
+
+---
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: crossplane-provider-aws
+  annotations:
+    argocd.argoproj.io/sync-wave: "30"   
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true 
+spec:
+  package: "public.ecr.aws/awsvijisarathy/crossplane-provider-aws:v0.16.0"
+
+
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: post-provider
+  generateName: after-provider
   annotations:
     argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
-    argocd.argoproj.io/sync-wave: "30"
+    argocd.argoproj.io/sync-wave: "40"
 spec:
   template:
     spec:
