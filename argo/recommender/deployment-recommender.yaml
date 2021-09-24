@@ -4,6 +4,8 @@ kind: Deployment
 metadata:
   name: recommender-app
   namespace: java
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"    
 spec:
   replicas: 2
   selector:
@@ -87,6 +89,8 @@ kind: Service
 metadata:
   name: recommender-svc
   namespace: java
+  annotations:
+    argocd.argoproj.io/sync-wave: "20"    
 spec:
   sessionAffinity: None
   type: ClusterIP  
@@ -108,7 +112,7 @@ metadata:
   annotations:
     argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
-    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-wave: "30"
 spec:
   template:
     spec:
