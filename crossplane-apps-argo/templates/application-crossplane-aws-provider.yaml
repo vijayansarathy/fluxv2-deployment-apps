@@ -2,18 +2,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: crossplane-aws-eks 
+  name: crossplane-aws-provider 
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io   
   annotations:
-    argocd.argoproj.io/sync-wave: "3"       
+    argocd.argoproj.io/sync-wave: "2"       
 spec:
   project: sarathy-workloads-project
   source:
     repoURL: git@github.com:vijayansarathy/fluxv2-deployment-apps.git
     targetRevision: HEAD
-    path: argo/crossplane-aws-eks
+    path: argo/crossplane-aws-provider
   destination:
     server: {{ .Values.spec.destination.server }}
     namespace: crossplane-system
