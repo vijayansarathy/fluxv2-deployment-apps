@@ -1,4 +1,4 @@
 spec:
   destination:
-    server: https://kubernetes.default.svc
+    server: https://CE8069B150FDA6420FA7B76EF1509F45.gr7.us-west-2.eks.amazonaws.com
 
