@@ -5,7 +5,7 @@ metadata:
   name: s3-reader
   namespace: nodejs
   annotations:
-    argocd.argoproj.io/sync-wave: "1"  
+    argocd.argoproj.io/sync-wave: "210"  
 spec:
   replicas: 3
   selector:
@@ -55,7 +55,7 @@ metadata:
   name: s3reader-svc
   namespace: nodejs
   annotations:
-    argocd.argoproj.io/sync-wave: "2"   
+    argocd.argoproj.io/sync-wave: "220"   
 spec:
   sessionAffinity: None
   type: ClusterIP  
@@ -76,7 +76,7 @@ metadata:
   annotations:
     argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
-    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-wave: "230"
 spec:
   template:
     spec:

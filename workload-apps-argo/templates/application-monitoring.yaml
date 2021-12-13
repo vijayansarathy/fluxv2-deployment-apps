@@ -12,9 +12,7 @@ metadata:
   name: monitoring 
   namespace: argocd
   finalizers:
-  - resources-finalizer.argocd.argoproj.io    
-  annotations:
-    argocd.argoproj.io/sync-wave: "50"    
+  - resources-finalizer.argocd.argoproj.io       
 spec:
   project: sarathy-workloads-project
   source:
