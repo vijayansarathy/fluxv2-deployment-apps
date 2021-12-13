@@ -8,7 +8,6 @@ namespace: store
 #
 resources:
   - namespace.yaml
-  - ingress.yaml
   - ../../../base/frontend
 
 transformers:
