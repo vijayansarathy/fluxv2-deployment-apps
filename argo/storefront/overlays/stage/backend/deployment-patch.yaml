@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: go
-        image: 937351930975.dkr.ecr.us-west-2.amazonaws.com/k8s-backend:initial
+        image: 937351930975.dkr.ecr.us-east-1.amazonaws.com/k8s-backend:noxray
         resources:
         imagePullPolicy: Always
         resources:
