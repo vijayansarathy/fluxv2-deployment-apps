@@ -1,0 +1,32 @@
+serviceAccounts:
+        server:
+            create: false
+            name: "prometheus-service-account"
+            #
+            # There is no mechanism yet to create the IAM Role using Flux.
+            # This role must have already been created and the OIDC provider added to IAM
+            #
+            annotations: 
+                eks.amazonaws.com/role-arn: arn:aws:iam::937351930975:role/EKS-AMP-ServiceAccount-Role
+nodeExporter:
+    enabled: true
+alertmanager:   
+    enabled: false
+pushgateway:
+    enabled: false
+server:
+    statefulSet:
+        enabled: false
+    persistentVolume:   
+        enabled: false
+    remoteWrite:
+        - url: https://aps-workspaces.us-east-1.amazonaws.com/workspaces/ws-46773539-a8c6-4344-a90b-948381f66811/api/v1/remote_write
+          sigv4:
+            region: us-east-1
+          queue_config:
+            max_samples_per_send: 1000
+            max_shards: 200
+            capacity: 2500
+    global:
+        scrape_interval: 10s
+        scrape_timeout: 10s

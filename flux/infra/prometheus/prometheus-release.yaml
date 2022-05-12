@@ -1,13 +1,17 @@
+---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: prometheus-for-amp
+  name: prometheus-helmrelease
+  namespace: flux-system
 spec:
+  targetNamespace: monitoring
   releaseName: prometheus-for-amp
   interval: 5m
   chart:
     spec:
       chart: prometheus
+      version: '15.8.5'
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
@@ -18,6 +22,6 @@ spec:
   #
   valuesFrom:
   - kind: ConfigMap
-    name: prometheus-nosidecar-configmap
+    name: prometheus-configmap
 
 
