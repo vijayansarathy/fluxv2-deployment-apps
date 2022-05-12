@@ -20,7 +20,7 @@ spec:
         metrics: prometheus
         traces: xray      
     spec:
-      serviceAccount: adot-collector
+      serviceAccount: aws-otel-collector
       containers:
         - name: otc-container
           image: amazon/aws-otel-collector:v0.15.1
