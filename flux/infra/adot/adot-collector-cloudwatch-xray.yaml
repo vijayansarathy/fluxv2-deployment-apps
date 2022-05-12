@@ -24,6 +24,10 @@ spec:
       containers:
         - name: otc-container
           image: amazon/aws-otel-collector:v0.15.1
+          imagePullPolicy: Always   
+          env:
+            - name: CLUSTER_NAME
+              value: k8s-gitops-cluster
           resources:
             requests:
               cpu: "1024m"
