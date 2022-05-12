@@ -1,0 +1,12 @@
+clusterName: k8s-gitops-cluster
+ingressClass: alb
+serviceAccounts:
+        server:
+            create: true
+            name: "aws-load-balancer-controller"
+            #
+            # There is no mechanism yet to create the IAM Role using Flux.
+            # This role must have already been created and the OIDC provider added to IAM
+            #
+            annotations: 
+                eks.amazonaws.com/role-arn: arn:aws:iam::937351930975:role/EKS-AWSLB-Controller-Role
