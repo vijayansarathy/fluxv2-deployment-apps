@@ -422,5 +422,5 @@ roleRef:
   name: adot-collector-role
 subjects:
   - kind: ServiceAccount
-    name: adot-collector
+    name: aws-otel-collector
     namespace: aws-otel-eks
