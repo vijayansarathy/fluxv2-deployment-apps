@@ -1,6 +1,6 @@
 serviceAccounts:
         server:
-            create: false
+            create: true
             name: "prometheus-service-account"
             #
             # There is no mechanism yet to create the IAM Role using Flux.
