@@ -5,7 +5,7 @@ resources:
   - awslb-controller-release.yaml
 configMapGenerator:
   - name: awslb-controller-configmap
-    namespace: kube-system
+    namespace: flux-system
     files:
       - values.yaml=awslb-controller-values.yaml
 configurations:
