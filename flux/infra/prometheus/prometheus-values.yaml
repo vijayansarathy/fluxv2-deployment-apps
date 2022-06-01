@@ -20,7 +20,8 @@ server:
     persistentVolume:   
         enabled: false
     remoteWrite:
-        - url: https://aps-workspaces.us-east-1.amazonaws.com/workspaces/ws-46773539-a8c6-4344-a90b-948381f66811/api/v1/remote_write
+#        - url: https://aps-workspaces.us-east-1.amazonaws.com/workspaces/ws-46773539-a8c6-4344-a90b-948381f66811/api/v1/remote_write
+        - url: https://aps-workspaces.us-west-2.amazonaws.com/workspaces/ws-f1b785f2-4d12-40ff-b5be-132f8b8ca14b/api/v1/remote_write
           sigv4:
             region: us-east-1
           queue_config:
