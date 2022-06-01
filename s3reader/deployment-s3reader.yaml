@@ -11,7 +11,7 @@ metadata:
   name: s3-reader
   namespace: nodejs
 spec:
-  replicas: 3
+  replicas: 5
   selector:
     matchLabels:
       app: s3-reader
