@@ -2,11 +2,10 @@ serviceAccounts:
         server:
             create: true
             name: "prometheus-service-account"
-            #
-            # There is no mechanism yet to create the IAM Role using Flux.
-            # This role must have already been created and the OIDC provider added to IAM
-            #
             annotations: 
+                #
+                # Make sure that the Trust policy of this IAM role is configured to trust the target EKS clusters's OIDC provider.
+                #
                 eks.amazonaws.com/role-arn: arn:aws:iam::937351930975:role/EKS-AMP-ServiceAccount-Role
 nodeExporter:
     enabled: true
