@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: go
-        image: 937351930975.dkr.ecr.us-west-2.amazonaws.com/k8s-frontend:random # {"$imagepolicy": "flux-system:app-image-stage-policy"}
+        image: 937351930975.dkr.ecr.us-west-2.amazonaws.com/k8s-frontend:noxray # {"$imagepolicy": "flux-system:app-image-stage-policy"}
         imagePullPolicy: Always
         resources:
           requests:
