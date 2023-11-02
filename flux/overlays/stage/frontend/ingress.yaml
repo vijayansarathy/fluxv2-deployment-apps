@@ -3,13 +3,15 @@ kind: Ingress
 metadata:
   name: ingress-frontend
 spec:
-  ingressClassName: ingress-nginx
+  ingressClassName: kong
   rules:
-  - host: storefront-stage.sarathy.io
-    http:
-      paths:
-      - backend:
-          serviceName: frontend-svc
-          servicePort: 80
-        path: /
-        
+    - host: storefront.caas-poc-127.msbx.spratingsvpc.com
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: frontend-svc
+                port:
+                  number: 80            
